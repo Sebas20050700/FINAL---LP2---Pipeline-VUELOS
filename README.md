@@ -48,3 +48,21 @@ Si (Precipitación > 0 mm):
     Sino:
         Estado = "🌧️ LLUVIA LÍQUIDA" (Riesgo Moderado: Operación Estándar)
 ```
+
+## 📂 Estructura del proyecto
+
+```text
+PROYECTO_AEREO_SENAMHI/
+│
+├── README.md                     # Documentación técnica
+├── requirements.txt              # Dependencias
+│
+├── src/                          # CÓDIGO FUENTE
+│   ├── detectar_api_oculta.py    # Sniffer de red
+│   ├── analisis_clima.py         # Lógica de negocio
+│   └── visualizador.py           # Dashboard
+│
+└── data/                         # GESTIÓN DE DATOS
+    └── output/
+        └── reporte_final.csv
+```
