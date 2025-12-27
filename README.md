@@ -64,3 +64,29 @@ El sistema se basa en la triangulación de tres fuentes de verdad para evitar fa
 ### Requisitos
 ```bash
 pip install pandas requests selenium webdriver-manager beautifulsoup4 geopy
+```
+## Estructura
+
+PROYECTO_AEREO_SENAMHI/
+│
+├── README.md                     <-- Tu documentación técnica
+├── requirements.txt              <-- (pandas, selenium, matplotlib, requests)
+│
+├── src/                          <-- CÓDIGO FUENTE
+│   ├── detectar_api_oculta.py
+│   ├── extractor_maestro.py
+│   ├── analisis_clima.py
+│   ├── descarga_satelite.py
+│   └── visualizador_resultados.py
+│
+├── data/                         <-- DATOS
+│   ├── input/
+│   │   └── datos_crudos_senamhi.txt
+│   └── output/
+│       ├── MAESTRO_ESTACIONES_SENAMHI_GEO.csv
+│       ├── reporte_final_clasificado.csv
+│       └── reporte_nieve.csv
+│
+└── evidence/                     <-- IMÁGENES
+    ├── EVIDENCIA_SATELITE_ACTUAL.jpg
+    └── GRAFICO_IMPACTO_CLIMATICO.png
