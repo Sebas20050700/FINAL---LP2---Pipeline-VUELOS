@@ -56,14 +56,3 @@ El sistema se basa en la triangulación de tres fuentes de verdad para evitar fa
     > **Ejemplo de Salida:** "El vuelo LA2023 (OpenSky) redujo velocidad un 20% en aproximación. Visual Crossing reportó visibilidad reducida, y SENAMHI confirmó alerta de nevada severa en la estación Granja Kcayra".
 
 ---
-
-## 💻 Instalación y Uso
-
-### Requisitos
-```bash
-pip install pandas requests selenium webdriver-manager beautifulsoup4 geopy
-```
-│
-└── evidence/                     <-- IMÁGENES
-    ├── EVIDENCIA_SATELITE_ACTUAL.jpg
-    └── GRAFICO_IMPACTO_CLIMATICO.png
