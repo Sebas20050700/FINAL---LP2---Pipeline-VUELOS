@@ -33,6 +33,32 @@ El módulo genera un objeto de datos (DataFrame/CSV) con la siguiente estructura
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+## 📂 Estructura del Proyecto
+
+Archivos generados y gestionados en esta rama:
+
+```text
+ETAPA-1-VISUAL-CROSSING/
+│
+├── README.md                       # 1. DOCUMENTACIÓN PRINCIPAL
+│                                   # Resumen ejecutivo, flujo del pipeline y 
+│                                   # guía rápida de uso.
+│
+├── Requerimientos/                 # 2. ESPECIFICACIONES TÉCNICAS
+│   ├── REQUERIMIENTOS.md           # Detalle de hardware, red y API Keys.
+│   └── requirements.txt            # Librerías (pip install) necesarias.
+│
+├── OUTPUT/                         # 3. RESULTADOS DEL PROCESAMIENTO
+│   └── data_maestra_clima.csv      # El "Master Data" que activa el resto 
+│                                   # del sistema (OpenSky y SENAMHI).
+│
+└── API_VISUAL_CROSSING.ipynb       # 4. MOTOR LÓGICO (CORE)
+                                    # Notebook con la arquitectura de 
+                                    # geocodificación y consumo de API.
+```
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ## Instalación de dependencias
 
 | `pip install -r Requerimientos.txt` |
