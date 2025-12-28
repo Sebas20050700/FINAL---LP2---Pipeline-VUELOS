@@ -18,3 +18,7 @@ Este módulo constituye la Etapa 1 del Pipeline. Su función principal es actuar
   - `aggregateHours`: `1` (Granularidad horaria para correlación precisa con vuelos).
   - `unitGroup`: `metric` (Celsius, km/h).
   - `contentType`: `json`.
+ 
+## Estructura de Salida (Contrato de Datos)
+
+El módulo genera un objeto de datos (DataFrame/CSV) con la siguiente estructura, sirviendo como llave primaria (`aeropuerto_id`) para el _Merge_ final:
