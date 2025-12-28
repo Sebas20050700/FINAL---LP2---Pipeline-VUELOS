@@ -87,8 +87,3 @@ PROYECTO-AEREO-SENAMHI/
     │   └── MAPA_VALIDACION_RESULTADOS.html
     └── figures/
         └── GRAFICO_IMPACTO_CLIMATICO.png
-
-└── 📂 results/                      # RESULTADOS VISUALES (Evidencias)
-    ├── MAPA_VALIDACION_RESULTADOS.html
-    ├── debug_mapa.html
-    └── GRAFICO_IMPACTO_CLIMATICO.png
