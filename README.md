@@ -1,89 +1,64 @@
-# Módulo 3: SENAMHI (Captura en paralelo)
-### Correlación Forense entre Fenómenos Atmosféricos y Eficiencia en Rutas Aéreas - Edición Perú
+# Módulo 1: Visual Crossing Weather Engine (Ingesta Base)
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Descripción
+Este módulo constituye la Etapa 1 del Pipeline. Su función principal es actuar como el orquestador geográfico del sistema. A partir de códigos aeronáuticos (ICAO/IATA), el motor resuelve la ubicación exacta y proporciona el contexto meteorológico global necesario para disparar los procesos de rastreo aéreo y validación local.
 
-![Python](https://img.shields.io/badge/Python-3.12-blue) ![Selenium](https://img.shields.io/badge/Selenium-Web%20Scraping-green) ![Folium](https://img.shields.io/badge/Folium-Geospatial_Viz-orange) ![Meteostat](https://img.shields.io/badge/Data-Meteostat_Historical-purple) ![Status](https://img.shields.io/badge/Status-Operational-brightgreen)
+## Funcionalidad clave
 
-## 📋 Descripción Técnica
-Esta rama (**`feature/senamhi-integration`**) constituye el núcleo de validación local del pipeline. A diferencia de las APIs globales que interpolan datos, este módulo implementa un enfoque de **"Ground Truth"** (Verdad en Tierra) específico para la orografía peruana.
+- Geocodificación Automática: Traduce identificadores de aeropuertos (ej. `SPJC`, `SPZO`) en coordenadas de precisión (_latitud_, _longitud_).
+- Suministro de "Master Data": Genera el archivo maestro que define la ventana temporal y espacial para los módulos de OpenSky y SENAMHI.
+- Contexto Sinóptico: Captura variables climáticas base (temperatura, velocidad del viento, visibilidad y ráfagas) bajo estándares internacionales (unidades métricas).
 
-Realiza una **extracción forense** de datos ocultos del SENAMHI, audita la cobertura de estaciones y valida si las condiciones reportadas por satélites globales (Visual Crossing) coinciden con la realidad local (Neblina, Nieve, Helada).
+## Especificaciones técnicas
 
----
+- Fuente de Datos: Visual Crossing Weather API (vía RapidAPI).
+- Tipo de Consulta: `Forecast` (Pronóstico/Histórico por horas).
+- Parámetros de Configuración:
+  - `location`: Dinámico (Format: `ICAO, PE`).
+  - `aggregateHours`: `1` (Granularidad horaria para correlación precisa con vuelos).
+  - `unitGroup`: `metric` (Celsius, km/h).
+  - `contentType`: `json`.
+ 
+## Estructura de Salida (Contrato de Datos)
 
-## 🔄 Flujo de Ejecución (Arquitectura Geocéntrica)
+El módulo genera un objeto de datos (DataFrame/CSV) con la siguiente estructura, sirviendo como llave primaria (`aeropuerto_id`) para el _Merge_ final:
 
-El pipeline opera bajo una lógica secuencial de 3 etapas, donde la **Ubicación Geográfica** actúa como la llave maestra que conecta los módulos:
+| Columna | Tipo | Descripción | Uso en el Pipeline |
+| :--- | :--- | :--- | :--- |
+| **aeropuerto_id** | `String` | Código ICAO del aeropuerto (Ej: SPJC). | **Primary Key** para la unión de tablas. |
+| **lat / lon** | `Float` | Coordenadas decimales del aeródromo. | Insumo geográfico para **OpenSky** y **SENAMHI**. |
+| **temp_celsius** | `Float` | Temperatura ambiente actual. | Validación cruzada vs. datos locales de SENAMHI. |
+| **viento_kmh** | `Float` | Velocidad del viento en km/h. | Análisis de impacto en la velocidad de las aeronaves. |
+| **condicion_global** | `String` | Descripción general del clima (Cloudy, Rain, etc). | Etiquetado y categorización del reporte final. |
 
-### 📍 ETAPA 1: Contexto Global (Visual Crossing)
-* **Input:** Nombre de Ciudad/Aeropuerto (ej. "Lima", "Cusco").
-* **Proceso:** Geolocalización y consulta de condiciones sinópticas.
-* **Output:** Coordenadas Maestras (`Lat: -12.02`, `Lon: -77.11`) y Viento General (`15 km/h`).
-* *Función:* Define el punto cero del análisis.
-
-### ✈️ ETAPA 2: Realidad Operativa (OpenSky Network)
-* **Input:** Coordenadas Maestras de Etapa 1 (`-12.02, -77.11`).
-* **Proceso:** Escaneo de tráfico aéreo en un radio dinámico sobre ese punto.
-* **Output:** Telemetría de aeronaves (ID, Velocidad Vertical, Patrones de Espera).
-* *Función:* Detectar si la atmósfera está afectando realmente a los vuelos en esa zona.
-
-### 🏔️ ETAPA 3: Validación Local (Módulo SENAMHI)
-* **Input:** Coordenadas Maestras de Etapa 1 (`-12.02, -77.11`).
-* **Proceso:**
-    1.  Búsqueda de la estación SENAMHI real más cercana (Cálculo Haversine).
-    2.  Extracción de datos de sensores locales (no satelitales).
-* **Output Final:** Confirmación de Fenómeno Crítico (ej. **"¿Hay Neblina densa?"**, **"¿Es Nieve o Lluvia?"**).
-* *Función:* Juez final que confirma o descarta la causa meteorológica.
-
----
-
-## 🔧 Implementación Técnica del Módulo SENAMHI
-
-### 1. Ingesta Forense (Web Scraping & Regex) 🕵️‍♂️
-El sistema extrae datos que no son públicos vía API, atacando directamente el código fuente del mapa oficial.
-* **Técnica:** Escaneo de patrones dentro del HTML renderizado usando Expresiones Regulares (`Regex`).
-* **Patrón de Extracción:**
-    ```python
-    regex = r'"nom"\s*:\s*"(.*?)".*?"lat"\s*:\s*(-?\d+\.?\d*).*?"lon"\s*:\s*(-?\d+\.?\d*)'
-    ```
-
-### 2. Algoritmo de Discriminación "Nieve vs. Lluvia" ❄️
-Para resolver el problema de la "Nieve Fantasma" en los Andes, se aplica una lógica física sobre los datos:
-* Si `Precipitación > 0` y `Temperatura <= 1.0°C` ➡️ **❄️ NIEVE (Riesgo Alto)**.
-* Si `Precipitación > 0` y `Temperatura > 3.0°C` ➡️ **🌧️ LLUVIA (Riesgo Medio)**.
-
-### 3. Visualización de Cobertura (Folium) 🗺️
-Genera mapas interactivos para validar la confianza del dato.
-* **Elementos:** Marcador de Referencia (Rojo) + Estación SENAMHI (Verde) + Radio de Confianza (5km).
-
----
+------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## 📂 Estructura del Proyecto
 
 Archivos generados y gestionados en esta rama:
 
 ```text
-PROYECTO-AEREO-SENAMHI/
+ETAPA-1-VISUAL-CROSSING/
 │
-├── README.md                       # Tu documentación
-├── requirements.txt                # Tus librerías
+├── README.md                       # 1. DOCUMENTACIÓN PRINCIPAL
+│                                   # Resumen ejecutivo, flujo del pipeline y 
+│                                   # guía rápida de uso.
 │
-├── src/
-│   └── scraping/
-│       └── Scraping_SENAMHI.ipynb  # Tu notebook principal
+├── Requerimientos/                 # 2. ESPECIFICACIONES TÉCNICAS
+│   ├── REQUERIMIENTOS.md           # Detalle de hardware, red y API Keys.
+│   └── requirements.txt            # Librerías (pip install) necesarias.
 │
-├── data/
-│   ├── raw/                        # Datos crudos (Inputs)
-│   │   ├── MAESTRO_ESTACIONES_SENAMHI_GEO.csv  <-- (CORREGIDO: Estaba aquí realmente)
-│   │   └── datos_crudos_senamhi.txt
-│   │
-│   └── processed/                  # Datos procesados (Outputs)
-│       ├── SENAMHI_ESTACIONES_FINAL.csv        <-- (El resultado de tu scraping)
-│       ├── reporte_final_clasificado.csv
-│       ├── reporte_nieve.csv
-│       └── senamhi_clima_indicadores.csv
+├── OUTPUT/                         # 3. RESULTADOS DEL PROCESAMIENTO
+│   └── data_maestra_clima.csv      # El "Master Data" que activa el resto 
+│                                   # del sistema (OpenSky y SENAMHI).
 │
-└── results/                        # RESULTADOS VISUALES
-    ├── maps/
-    │   └── MAPA_VALIDACION_RESULTADOS.html
-    └── figures/
-        └── GRAFICO_IMPACTO_CLIMATICO.png
+└── API_VISUAL_CROSSING.ipynb       # 4. MOTOR LÓGICO (CORE)
+                                    # Notebook con la arquitectura de 
+                                    # geocodificación y consumo de API.
+```
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+## Instalación de dependencias
+
+| `pip install -r Requerimientos.txt` |
