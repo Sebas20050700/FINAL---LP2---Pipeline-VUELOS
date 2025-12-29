@@ -64,25 +64,25 @@ Archivos generados y gestionados en esta rama:
 ```text
 PROYECTO-AEREO-SENAMHI/
 │
-├── README.md                       # Tu documentación
-├── requirements.txt                # Tus librerías
+├── README.md                       # La documentación
+├── requirements.txt                # Librerías requeridas
 │
 ├── src/
 │   └── scraping/
-│       └── Scraping_SENAMHI.ipynb  # Tu notebook principal
+│       └── Scraping_SENAMHI.ipynb  # El notebook principal
 │
 ├── data/
 │   ├── raw/                        # Datos crudos (Inputs)
-│   │   ├── MAESTRO_ESTACIONES_SENAMHI_GEO.csv  <-- (CORREGIDO: Estaba aquí realmente)
+│   │   ├── MAESTRO_ESTACIONES_SENAMHI_GEO.csv
 │   │   └── datos_crudos_senamhi.txt
 │   │
 │   └── processed/                  # Datos procesados (Outputs)
-│       ├── SENAMHI_ESTACIONES_FINAL.csv        <-- (El resultado de tu scraping)
+│       ├── SENAMHI_ESTACIONES_FINAL.csv        <-- (El resultado del scraping)
 │       ├── reporte_final_clasificado.csv
 │       ├── reporte_nieve.csv
 │       └── senamhi_clima_indicadores.csv
 │
-└── results/                        # RESULTADOS VISUALES
+└── results/                        # Resultados visuales
     ├── maps/
     │   └── MAPA_VALIDACION_RESULTADOS.html
     └── figures/
