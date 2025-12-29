@@ -1,0 +1,5 @@
+HORA_CONSULTA,aeropuerto_id,lat,lon,temp_c,viento_kmh,visibilidad_km,estado_actual,pronostico_futuro,fuente
+11:01:37,SPJC,-12.0562,-77.0268,0.0,0.0,10.0,N/D,Clear,Visual Crossing API
+11:01:38,SPZO,-12.0562,-77.0268,0.0,0.0,10.0,N/D,Clear,Visual Crossing API
+11:01:39,SPQU,40.7474,-86.0604,-9.0,36.4,3.0,N/D,Overcast,Visual Crossing API
+11:01:40,SPQT,-12.0562,-77.0268,0.0,0.0,10.0,N/D,Clear,Visual Crossing API
