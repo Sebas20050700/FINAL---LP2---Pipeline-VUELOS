@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_f864678da57bb6d021324a3b4b34618f {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_f864678da57bb6d021324a3b4b34618f" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_f864678da57bb6d021324a3b4b34618f = L.map(
+                "map_f864678da57bb6d021324a3b4b34618f",
+                {
+                    center: [-12.02, -77.11],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 13,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_798ca25c73b9206e73ba1b2d787e9124 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_798ca25c73b9206e73ba1b2d787e9124.addTo(map_f864678da57bb6d021324a3b4b34618f);
+        
+    
+            var marker_b54609069bba027cb1f5725b2e51b0e8 = L.marker(
+                [-12.02, -77.11],
+                {
+}
+            ).addTo(map_f864678da57bb6d021324a3b4b34618f);
+        
+    
+            var icon_442eda931e8bfc0b5e9a3ac72f61fa99 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "plane",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6c938e80eb7fade272d23a3ae1341e83 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_60cb00130dd7d2b4043d0ca5ce34d706 = $(`<div id="html_60cb00130dd7d2b4043d0ca5ce34d706" style="width: 100.0%; height: 100.0%;">AERONAVE</div>`)[0];
+                popup_6c938e80eb7fade272d23a3ae1341e83.setContent(html_60cb00130dd7d2b4043d0ca5ce34d706);
+            
+        
+
+        marker_b54609069bba027cb1f5725b2e51b0e8.bindPopup(popup_6c938e80eb7fade272d23a3ae1341e83)
+        ;
+
+        
+    
+    
+                marker_b54609069bba027cb1f5725b2e51b0e8.setIcon(icon_442eda931e8bfc0b5e9a3ac72f61fa99);
+            
+    
+            var marker_90e7930451863cbe3576e8efc4e25e84 = L.marker(
+                [-12.00889, -77.08447],
+                {
+}
+            ).addTo(map_f864678da57bb6d021324a3b4b34618f);
+        
+    
+            var icon_9d6a29c661f3955ba6715fb6d43cec63 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "cloud",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ec3dac3d77fe69839d6cd970d62d6954 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8cd072a727bb4449bc6c2fc7c319bad4 = $(`<div id="html_8cd072a727bb4449bc6c2fc7c319bad4" style="width: 100.0%; height: 100.0%;">SENAMHI: SAN MARTIN DE PORRES</div>`)[0];
+                popup_ec3dac3d77fe69839d6cd970d62d6954.setContent(html_8cd072a727bb4449bc6c2fc7c319bad4);
+            
+        
+
+        marker_90e7930451863cbe3576e8efc4e25e84.bindPopup(popup_ec3dac3d77fe69839d6cd970d62d6954)
+        ;
+
+        
+    
+    
+                marker_90e7930451863cbe3576e8efc4e25e84.setIcon(icon_9d6a29c661f3955ba6715fb6d43cec63);
+            
+    
+            var poly_line_f4d3a82cec696e44c64f8856e2438487 = L.polyline(
+                [[-12.02, -77.11], [-12.00889, -77.08447]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": "5, 10", "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_f864678da57bb6d021324a3b4b34618f);
+        
+    
+            var circle_3cc8891d8965d1a8696bc80597f4a102 = L.circle(
+                [-12.00889, -77.08447],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.1, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5000, "stroke": true, "weight": 3}
+            ).addTo(map_f864678da57bb6d021324a3b4b34618f);
+        
+    
+        var popup_c0b1641ce4394deddbcb1f1582fedd60 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_93df2d7b1ca0888d1b6ea658648130e9 = $(`<div id="html_93df2d7b1ca0888d1b6ea658648130e9" style="width: 100.0%; height: 100.0%;">Radio Confianza 5km</div>`)[0];
+                popup_c0b1641ce4394deddbcb1f1582fedd60.setContent(html_93df2d7b1ca0888d1b6ea658648130e9);
+            
+        
+
+        circle_3cc8891d8965d1a8696bc80597f4a102.bindPopup(popup_c0b1641ce4394deddbcb1f1582fedd60)
+        ;
+
+        
+    
+</script>
+</html>
